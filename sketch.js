@@ -25,7 +25,7 @@ function setup() {
   
   ryuk=createSprite(width/2,height*0.75,20,20);
   ryuk.addImage(ryukImage);
-  ryuk.scale=0.5
+  ryuk.scale=height/1000;
   
   restart=createSprite(width/2,height*0.75,20,20);
   restart.addImage(restartImage);
@@ -45,9 +45,9 @@ function draw() {
    
     background1.velocityY=3;
     
-    if(background1.y>height*2.6)
+    if(background1.y>height)
     {
-      background1.y=height/2;
+      background1.y=0;
     }
   
     if(pieceGroup.isTouching(ryuk))
@@ -89,7 +89,7 @@ function draw() {
       stroke('black');
       fill('blue');
       textSize(15);
-      text("Grrrr, I have no PAGES!",ryuk.x+15,ryuk.y-50);
+      text("Grrrr, I have no PAGES!",ryuk.x+90,ryuk.y-50);
     }
   
   percentComplete();
@@ -98,7 +98,7 @@ function draw() {
   stroke('black');
   fill('red');
   textSize(30);
-  text("Score : "+score,260,30);
+  text("Score : "+score,width-260,height-height+30);
 }
 
 function spawnPiece()
@@ -106,11 +106,11 @@ function spawnPiece()
   if(frameCount%80===0)
   {
     deathNotePiece=createSprite(200,height-height-50);
-    deathNotePiece.x=Math.round(random(width+50,width-380));
+    deathNotePiece.x=Math.round(random(width-width+20,width-380));
     deathNotePiece.velocityY=4;
     deathNotePiece.addImage(deathNotePieceImage);
     deathNotePiece.lifetime=height/4;
-    deathNotePiece.scale=0.1;
+    deathNotePiece.scale=height/6000;
     pieceGroup.add(deathNotePiece);
     
     ryuk.depth=deathNotePiece.depth;
@@ -126,11 +126,11 @@ function spawnFire()
   if(frameCount%200===0 && frameCount>0)
   {
     fire=createSprite(200,height-height-50);
-    fire.x=Math.round(random(width+20,width-380));
+    fire.x=Math.round(random(width-width+20,width-380));
     fire.velocityY=6;
     fire.addImage(fireImage);
     fire.lifetime=height/6;
-    fire.scale=0.3;
+    fire.scale=height/1000;
     fireGroup.add(fire);
     //fire.debug=true;
     fire.setCollider("rectangle",0,0,300,300);
