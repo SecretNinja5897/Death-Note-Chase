@@ -216,7 +216,7 @@ function percentComplete()
         break;
       }  
     
-    case 6:
+    case 60:
       {
         stroke('black');
         fill('blue');
