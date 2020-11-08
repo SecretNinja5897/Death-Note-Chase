@@ -16,18 +16,18 @@ function preload()
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
 
-  background1=createSprite(200,1050,20,20);
+  background1=createSprite(width/2,height/2,width,height);
   background1.addImage(background2Image);
   background1.scale=15;
   background1.velocityY=3;
   
-  ryuk=createSprite(200,300,20,20);
+  ryuk=createSprite(width/2,height*0.75,20,20);
   ryuk.addImage(ryukImage);
   ryuk.scale=0.5
   
-  restart=createSprite(200,300,20,20);
+  restart=createSprite(width/2,height*0.75,20,20);
   restart.addImage(restartImage);
   restart.visible=false;
   
@@ -45,9 +45,9 @@ function draw() {
    
     background1.velocityY=3;
     
-    if(background1.y>1300)
+    if(background1.y>height*2.6)
     {
-      background1.y=-378.6;
+      background1.y=height/2;
     }
   
     if(pieceGroup.isTouching(ryuk))
@@ -71,8 +71,8 @@ function draw() {
   {
     restart.visible=true;
     background1.velocityY=0;
-    ryuk.x=200;
-    ryuk.y=200;
+    ryuk.x=width/2;
+    ryuk.y=height/2;
     fireGroup.destroyEach();
     pieceGroup.destroyEach();
     
@@ -105,11 +105,11 @@ function spawnPiece()
 {
   if(frameCount%80===0)
   {
-    deathNotePiece=createSprite(200,-50);
-    deathNotePiece.x=Math.round(random(20,380));
+    deathNotePiece=createSprite(200,height-height-50);
+    deathNotePiece.x=Math.round(random(width+50,width-380));
     deathNotePiece.velocityY=4;
     deathNotePiece.addImage(deathNotePieceImage);
-    deathNotePiece.lifetime=350;
+    deathNotePiece.lifetime=height/4;
     deathNotePiece.scale=0.1;
     pieceGroup.add(deathNotePiece);
     
@@ -123,13 +123,13 @@ function spawnPiece()
 
 function spawnFire()
 {
-  if(frameCount%200===0&&frameCount>0)
+  if(frameCount%200===0 && frameCount>0)
   {
-    fire=createSprite(200,-50);
-    fire.x=Math.round(random(20,380));
-    fire.velocityY=4;
+    fire=createSprite(200,height-height-50);
+    fire.x=Math.round(random(width+20,width-380));
+    fire.velocityY=6;
     fire.addImage(fireImage);
-    fire.lifetime=350;
+    fire.lifetime=height/6;
     fire.scale=0.3;
     fireGroup.add(fire);
     //fire.debug=true;
@@ -147,28 +147,28 @@ function controls()
 {
   if(keyDown("A"))
   {
-    ryuk.x+=-3;
+    ryuk.x+=-width/200;
   }
   
   if(keyDown("D"))
   {
-    ryuk.x+=3;
+    ryuk.x+=width/200;
   }
   
   if(keyDown("W"))
   {
-    ryuk.y+=-3;
+    ryuk.y+=-height/200;
   }
   
   if(keyDown("S"))
   {
-    ryuk.y+=3;
+    ryuk.y+=height/200;
   }
   
-  if((ryuk.x>400||ryuk.x<0)||(ryuk.y>400||ryuk.y<0))
+  if((ryuk.x>width||ryuk.x<width-width)||(ryuk.y>height||ryuk.y<height-height))
   {
-    ryuk.x=200;
-    ryuk.y=300;
+    ryuk.x=width/2;
+    ryuk.y=height*0.75;
   }
 }
 
@@ -221,8 +221,8 @@ function percentComplete()
         stroke('black');
         fill('blue');
         textSize(10);
-        text("My death note is 100% complete!",ryuk.x+15,ryuk.y-              60);
-        text("Im bored now so lets restart!",ryuk.x+15,ryuk.y-                50);
+        text("My death note is complete!",ryuk.x+15,ryuk.y-                 60);
+        text("Im bored now so lets restart!",ryuk.x+15,ryuk.y-               50);
         gameState="END";
         break;
       }
